@@ -64,4 +64,19 @@ APN_PASS="0"
 sudo systemctl start wg-quick@wg0.service # And enable
 
 # If using nginx, change server port to something other than 80 in /etc/lighttpd/lighttpd.conf
+
+# use cron job to startup 4g
+# add the following to /home/pi/startup-dlink.bash
+#!/bin/bash
+
+ping 10.66.66.1 -c 1 && exit 0
+pkill ping
+sudo sakis3g disconnect || true
+sudo wg-quick down wg0 || true
+sudo sakis3g connect
+sudo wg-quick up wg0
+ping 10.66.66.1 &
+
+# Add this to crontab -e, if your user is pi
+* * * * * /bin/bash /home/pi/startup-dlink.bash 
 ```
