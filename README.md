@@ -61,6 +61,7 @@ APN_PASS="0"
 
 # Set Up Wireguard
 # Edit /etc/wireguard/wg0.conf
+You might need to run apt install raspberrypi-kernel-headers
 sudo systemctl start wg-quick@wg0.service # And enable
 
 # If using nginx, change server port to something other than 80 in /etc/lighttpd/lighttpd.conf
